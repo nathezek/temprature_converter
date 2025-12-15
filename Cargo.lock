@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "temprature_converter"
-version = "0.1.0"
+name = "temp_tui"
+version = "0.0.4"

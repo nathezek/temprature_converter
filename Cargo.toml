@@ -1,6 +1,9 @@
 [package]
-name = "temprature_converter"
-version = "0.1.0"
+name = "temp_tui"
+version = "0.0.4"
 edition = "2024"
+description = "A command-line tool to convert temperatures between Celsius, Fahrenheit and Kelvin."
+license = "MIT"
+repository = "github.com"
 
 [dependencies]
