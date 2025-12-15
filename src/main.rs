@@ -11,16 +11,15 @@ fn main() {
    "#
     );
 
-    // Basic usage//
-    // println!("\nCommands: ['1' to convert °F to °C ] | [ '2': to convert °C to °F ] | [ '3' to convert °C to K ] | [ '4' to convert °F to k ]");
-    // Loop helps with re-running the compute for another value.
     'main_menu: loop {
         println!("\n------ Main Menu -------");
         println!("1. Celsius to Fahrenheit");
         println!("2. Fahrenheit to Celsius");
+        println!("3. Fahrenheit to Kelvin");
+        println!("4. Celsius to Kelvin");
         println!("q. Quit program");
 
-        print!("Enter your choice (1, 2, or q): ");
+        print!("Enter your choice (1, 2, 3, 4 or q): ");
         stdout().flush().expect("Failed to flush");
 
         // Created a mutable input variable to accept use input.
@@ -50,7 +49,7 @@ fn main() {
             "2" => {
                 println!("\nEntering Fahrenheit to Celsius mode. Type 'q' to return to main menu.");
                 'f_to_c_loop: loop {
-                    if let Some(fahrienheit) = get_input("Enter a celsius number: ") {
+                    if let Some(fahrienheit) = get_input("Enter a fahrienheit number: ") {
                         let celsius = fahrienheit_to_celsius(fahrienheit);
                         println!("Result: {}°F = {:.2}°C", fahrienheit, celsius);
                     } else {
@@ -58,8 +57,24 @@ fn main() {
                     }
                 }
             }
+            "3" => 'f_to_k_loop: loop {
+                if let Some(fahrienheit) = get_input("Enter a fahrienheit number: ") {
+                    let kelvin = fahrienheit_to_kelivn(fahrienheit);
+                    println!("Result: {}°F = {:.2}K", fahrienheit, kelvin);
+                } else {
+                    break 'f_to_k_loop;
+                }
+            },
+            "4" => 'c_to_k_loop: loop {
+                if let Some(celsius) = get_input("Enter a celsius number: ") {
+                    let kelvin = celsius_to_kelvin(celsius);
+                    println!("Result: {}°C = {:.2}K", celsius, kelvin);
+                } else {
+                    break 'c_to_k_loop;
+                }
+            },
             _ => {
-                println!("Invalid choice. Please select 1, 2, or q.");
+                println!("Invalid choice. Please select 1, 2, 3, 4 or q.");
             }
         }
     }
@@ -72,6 +87,14 @@ fn celsius_to_fahrienheit(celsius: f32) -> f32 {
 
 fn fahrienheit_to_celsius(fahrienheit: f32) -> f32 {
     (fahrienheit - 32.0) * 5.0 / 9.0
+}
+
+fn celsius_to_kelvin(celsius: f32) -> f32 {
+    celsius + 273.15
+}
+
+fn fahrienheit_to_kelivn(fahrienheit: f32) -> f32 {
+    (fahrienheit - 32.0) * 5.0 / 9.0 + 273.15
 }
 
 // ----------------------------------- HELPER FUNCTIONS -------------------------------- //
