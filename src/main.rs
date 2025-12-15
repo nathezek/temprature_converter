@@ -1,25 +1,23 @@
 use std::io::{self, stdout, Write};
 
 // ------------- Compute --------------------- //
-fn compute(input: i32) -> i32 {
-    (input - 32) * 5 / 9
+fn compute(input: f32) -> f32 {
+    (input - 32.0) * 5.0 / 9.0
 }
 
 fn main() {
     println!(
         r#"
-                                                                                                                     
-                                                                                                                     
-████████ ███████ ███    ███ ██████       ██████  ██████  ███    ██ ██    ██ ███████ ██████  ████████ ███████ ██████  
-   ██    ██      ████  ████ ██   ██     ██      ██    ██ ████   ██ ██    ██ ██      ██   ██    ██    ██      ██   ██ 
-   ██    █████   ██ ████ ██ ██████      ██      ██    ██ ██ ██  ██ ██    ██ █████   ██████     ██    █████   ██████  
-   ██    ██      ██  ██  ██ ██          ██      ██    ██ ██  ██ ██  ██  ██  ██      ██   ██    ██    ██      ██   ██ 
-   ██    ███████ ██      ██ ██           ██████  ██████  ██   ████   ████   ███████ ██   ██    ██    ███████ ██   ██ 
-                                                                                                                     
-                                                                                                                     
-    "#
+         ████████ ███████ ███    ███ ██████        ████████ ██    ██ ██ 
+            ██    ██      ████  ████ ██   ██          ██    ██    ██ ██ 
+            ██    █████   ██ ████ ██ ██████  █████    ██    ██    ██ ██ 
+            ██    ██      ██  ██  ██ ██               ██    ██    ██ ██ 
+            ██    ███████ ██      ██ ██               ██     ██████  ██ 
+   "#
     );
 
+    // Basic usage//
+    println!("\nCommands: ['1' to convert °F to °C ] | [ '2': to convert °C to °F ] | [ '3' to convert °C to K ] | [ '4' to convert °F to k ]");
     // Loop helps with re-running the compute for another value.
     loop {
         print!("\nEnter a number to convert: ");
@@ -40,7 +38,14 @@ fn main() {
             }
             _ => {
                 // Now change to a valid type for compute and compute the value with function.
-                let input: i32 = input.parse().expect("Mismatched type here.");
+                let input: f32 = match input.parse() {
+                    Ok(num) => num,
+                    Err(_) => {
+                        println!("Not a command");
+                        continue;
+                    }
+                };
+
                 let result = compute(input);
                 println!("Result is : {}°C", result)
             }
